@@ -1,0 +1,92 @@
+/* LaLiga en datos — datos compartidos y modelo de predicción.
+   Se actualiza cada lunes (clasificación, forma, calendario). */
+
+const TEAMS = {
+  BAR:{n:"FC Barcelona",short:"Barça",pj:9,g:9,e:0,p:0,gf:39,gc:9,form:"GGGGG",h:{pj:4,g:4,e:0,p:0},a:{pj:5,g:5,e:0,p:0},color:"#a50044"},
+  ATM:{n:"Atlético de Madrid",short:"Atlético",pj:9,g:7,e:1,p:1,gf:19,gc:8,form:"GGGGG",h:{pj:4,g:3,e:1,p:0},a:{pj:5,g:4,e:0,p:1},color:"#cb3524"},
+  RMA:{n:"Real Madrid",short:"Real Madrid",pj:9,g:7,e:0,p:2,gf:23,gc:9,form:"GGPGG",h:{pj:5,g:5,e:0,p:0},a:{pj:4,g:2,e:0,p:2},color:"#1a2341"},
+  BET:{n:"Real Betis",short:"Betis",pj:9,g:6,e:1,p:2,gf:16,gc:14,form:"GGEGP",h:{pj:5,g:4,e:0,p:1},a:{pj:4,g:2,e:1,p:1},color:"#00a650"},
+  RSO:{n:"Real Sociedad",short:"Real Sociedad",pj:9,g:5,e:1,p:3,gf:17,gc:17,form:"PEGGG",h:{pj:4,g:2,e:1,p:1},a:{pj:5,g:3,e:0,p:2},color:"#0066b3"},
+  SEV:{n:"Sevilla FC",short:"Sevilla",pj:9,g:4,e:2,p:3,gf:14,gc:16,form:"GGPEP",h:{pj:4,g:2,e:0,p:2},a:{pj:5,g:2,e:2,p:1},color:"#d2001c"},
+  ALA:{n:"Deportivo Alavés",short:"Alavés",pj:9,g:3,e:2,p:4,gf:13,gc:10,form:"PPEPP",h:{pj:5,g:3,e:0,p:2},a:{pj:4,g:0,e:2,p:2},color:"#1c4f9c"},
+  CEL:{n:"Celta de Vigo",short:"Celta",pj:9,g:2,e:5,p:2,gf:10,gc:7,form:"EEGEG",h:{pj:5,g:2,e:1,p:2},a:{pj:4,g:0,e:4,p:0},color:"#8ac3ee",dark:true},
+  DEP:{n:"RC Deportivo",short:"Deportivo",pj:9,g:2,e:5,p:2,gf:13,gc:12,form:"EPEPE",h:{pj:5,g:1,e:3,p:1},a:{pj:4,g:1,e:2,p:1},color:"#0a4c9b"},
+  OSA:{n:"CA Osasuna",short:"Osasuna",pj:9,g:3,e:2,p:4,gf:10,gc:18,form:"PPEPG",h:{pj:5,g:2,e:2,p:1},a:{pj:4,g:1,e:0,p:3},color:"#ab122b"},
+  ATH:{n:"Athletic Club",short:"Athletic",pj:7,g:2,e:3,p:2,gf:7,gc:6,form:"GGEEE",h:{pj:4,g:1,e:2,p:1},a:{pj:3,g:1,e:1,p:1},color:"#ee2523"},
+  VIL:{n:"Villarreal CF",short:"Villarreal",pj:9,g:2,e:3,p:4,gf:13,gc:13,form:"PGGPE",h:{pj:4,g:1,e:1,p:2},a:{pj:5,g:1,e:2,p:2},color:"#ffe667",dark:true},
+  RAY:{n:"Rayo Vallecano",short:"Rayo",pj:8,g:2,e:3,p:3,gf:12,gc:17,form:"GPGEE",h:{pj:3,g:2,e:1,p:0},a:{pj:5,g:0,e:2,p:3},color:"#c8102e"},
+  GET:{n:"Getafe CF",short:"Getafe",pj:9,g:2,e:3,p:4,gf:5,gc:11,form:"EPGPE",h:{pj:5,g:2,e:3,p:0},a:{pj:4,g:0,e:0,p:4},color:"#005bac"},
+  ESP:{n:"RCD Espanyol",short:"Espanyol",pj:9,g:2,e:2,p:5,gf:11,gc:12,form:"GPPEP",h:{pj:5,g:1,e:1,p:3},a:{pj:4,g:1,e:1,p:2},color:"#1455a3"},
+  RAC:{n:"Racing de Santander",short:"Racing",pj:9,g:2,e:2,p:5,gf:13,gc:25,form:"GPPEP",h:{pj:4,g:2,e:2,p:0},a:{pj:5,g:0,e:0,p:5},color:"#00693e"},
+  LEV:{n:"Levante UD",short:"Levante",pj:8,g:1,e:4,p:3,gf:12,gc:16,form:"EPPEE",h:{pj:3,g:1,e:1,p:1},a:{pj:5,g:0,e:3,p:2},color:"#00246b"},
+  ELC:{n:"Elche CF",short:"Elche",pj:9,g:1,e:4,p:4,gf:11,gc:17,form:"EPGEE",h:{pj:4,g:0,e:1,p:3},a:{pj:5,g:1,e:3,p:1},color:"#00843d"},
+  VAL:{n:"Valencia CF",short:"Valencia",pj:9,g:1,e:3,p:5,gf:6,gc:15,form:"PGPEE",h:{pj:5,g:0,e:2,p:3},a:{pj:4,g:1,e:1,p:2},color:"#f7941e",dark:true},
+  MAL:{n:"Málaga CF",short:"Málaga",pj:9,g:0,e:4,p:5,gf:6,gc:18,form:"EPPEP",h:{pj:5,g:0,e:3,p:2},a:{pj:4,g:0,e:1,p:3},color:"#0e3b82"}
+};
+
+/* Jornada 10 — ya disputados (23-25 oct) y pendientes */
+const J10_PLAYED = [
+  {h:"ALA",a:"MAL",hs:1,as:1,when:"Vie 23 oct"},
+  {h:"RAY",a:"ELC",hs:0,as:3,when:"Sáb 24 oct"},
+  {h:"RAC",a:"ESP",hs:2,as:1,when:"Sáb 24 oct"},
+  {h:"VAL",a:"VIL",hs:1,as:2,when:"Sáb 24 oct"},
+  {h:"ATM",a:"DEP",hs:1,as:0,when:"Sáb 24 oct"}
+];
+const J10_PENDING = [
+  {h:"ATH",a:"GET",when:"Dom 25 oct · 15:00"},
+  {h:"CEL",a:"BET",when:"Dom 25 oct · 17:15"},
+  {h:"RSO",a:"LEV",when:"Dom 25 oct · 19:30"},
+  {h:"BAR",a:"RMA",when:"Dom 25 oct · 21:00",tag:"El Clásico"},
+  {h:"SEV",a:"OSA",when:"Lun 26 oct · 21:00"}
+];
+
+/* Jornada 11 — próximo fin de semana */
+const FIXTURES = [
+  {h:"VIL",a:"ESP",when:"Vie 30 oct · 21:00"},
+  {h:"LEV",a:"ATM",when:"Sáb 31 oct · 14:00"},
+  {h:"RAY",a:"CEL",when:"Sáb 31 oct · 16:15"},
+  {h:"BET",a:"MAL",when:"Sáb 31 oct · 18:30"},
+  {h:"BAR",a:"ALA",when:"Sáb 31 oct · 21:00"},
+  {h:"GET",a:"SEV",when:"Dom 1 nov · 14:00"},
+  {h:"RAC",a:"RMA",when:"Dom 1 nov · 16:15"},
+  {h:"ELC",a:"VAL",when:"Dom 1 nov · 18:30"},
+  {h:"ATH",a:"RSO",when:"Dom 1 nov · 21:00"},
+  {h:"DEP",a:"OSA",when:"Lun 2 nov · 21:00"}
+];
+
+const PRESETS = { tabla:{form:0,loc:0,adv:25,draw:50}, mixto:{form:55,loc:55,adv:28,draw:50} };
+
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function formPts(f){let s=0;for(const c of f) s += c==="G"?3:c==="E"?1:0; return s/5;}
+function ppg(t){return (t.g*3+t.e)/t.pj;}
+function gdpg(t){return (t.gf-t.gc)/t.pj;}
+function homePpg(t){return t.h.pj? (t.h.g*3+t.h.e)/t.h.pj : ppg(t);}
+function awayPpg(t){return t.a.pj? (t.a.g*3+t.a.e)/t.a.pj : ppg(t);}
+function teamScore(code,isHome,p){
+  const t=TEAMS[code]; const wForm=p.form/100, wLoc=p.loc/100;
+  const base = ppg(t)*(1-wForm) + formPts(t.form)*wForm;
+  const locAdj = isHome ? (homePpg(t)-ppg(t)) : (awayPpg(t)-ppg(t));
+  let s = base + gdpg(t)*0.35 + locAdj*wLoc;
+  if(isHome) s += p.adv/100;
+  return s;
+}
+function matchProbs(hCode,aCode,p){
+  const sh=teamScore(hCode,true,p), sa=teamScore(aCode,false,p);
+  const diff=sh-sa;
+  let pH=clamp(0.5+diff*0.155,0.04,0.9);
+  let pD=clamp((p.draw/100)*0.34-Math.abs(diff)*0.05,0.08,0.34);
+  let pA=1-pH-pD;
+  if(pA<0.03){const rest=0.97, ratio=pH/(pH+pD); pA=0.03; pH=rest*ratio; pD=rest*(1-ratio);}
+  const sum=pH+pD+pA;
+  return {pH:pH/sum,pD:pD/sum,pA:pA/sum,diff};
+}
+function pct(v){return Math.round(v*100)+"%";}
+function initials(code){return code;} // 3-letter codes already short and legible
+function standings(){
+  return Object.entries(TEAMS).map(([code,t])=>({code,t,pts:t.g*3+t.e,dg:t.gf-t.gc}))
+    .sort((a,b)=> b.pts-a.pts || b.dg-a.dg || b.t.gf-a.t.gf);
+}
+function crestStyle(code){
+  const t=TEAMS[code];
+  return `background:${t.color};color:${t.dark?'#14181f':'#fff'}`;
+}

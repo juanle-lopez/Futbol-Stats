@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LaLiga en datos — Previsiones</title>
+<meta name="description" content="Simulador de la Jornada 11 de LaLiga: ajusta forma reciente, ventaja de local y probabilidad de empate para ver cómo cambian las previsiones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="brandbar"><div class="inner">
+  <div class="brand"><span class="mark">⚽</span>LaLiga en datos</div>
+  <nav>
+    <a href="index.html">Jornada</a>
+    <a href="predicciones.html" class="on">Previsiones</a>
+    <a href="equipos.html">Equipos</a>
+  </nav>
+</div></div>
+
+<div class="wrap" style="padding-top:20px">
+  <div>
+    <h1>Previsiones · Jornada 11</h1>
+    <p class="sub">Un modelo estadístico, no una predicción exacta: combina puntos por partido, diferencia de goles, forma de los últimos 5 partidos y rendimiento como local/visitante. Muévelo tú mismo.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="panel" style="position:sticky;top:12px">
+      <h2>Ajustes del modelo</h2>
+      <div class="presets" id="presets">
+        <button data-p="tabla" aria-pressed="false">Solo clasificación</button>
+        <button data-p="mixto" aria-pressed="true">Equilibrado</button>
+      </div>
+      <div class="ctl">
+        <label for="form">Peso de la forma reciente <output id="formOut">55%</output></label>
+        <input type="range" id="form" min="0" max="100" value="55">
+      </div>
+      <div class="ctl">
+        <label for="loc">Efecto local/visitante <output id="locOut">55%</output></label>
+        <input type="range" id="loc" min="0" max="100" value="55">
+      </div>
+      <div class="ctl">
+        <label for="adv">Ventaja de jugar en casa <output id="advOut">28%</output></label>
+        <input type="range" id="adv" min="0" max="60" value="28">
+      </div>
+      <div class="ctl">
+        <label for="draw">Probabilidad base de empate <output id="drawOut">50%</output></label>
+        <input type="range" id="draw" min="0" max="100" value="50">
+      </div>
+      <p class="note">El modelo es orientativo: no sustituye al análisis de un experto ni garantiza resultados. Pensado como herramienta de exploración de escenarios.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <div class="exec">
+        <h2 class="big">Resumen de la jornada</h2>
+        <p class="lead">Con los ajustes actuales, así reparte el modelo los 10 partidos de la Jornada 11.</p>
+        <div class="summary">
+          <div class="sumcard win"><b id="sumH">0</b><span>Gana local</span></div>
+          <div class="sumcard draw"><b id="sumD">0</b><span>Empates</span></div>
+          <div class="sumcard loss"><b id="sumA">0</b><span>Gana visitante</span></div>
+        </div>
+      </div>
+      <div class="cards" id="matches"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Método</h2>
+    <div class="meth">
+      <details>
+        <summary>¿Cómo se calcula la probabilidad de cada partido?</summary>
+        <p>Cada equipo recibe una puntuación que mezcla sus puntos por partido en la temporada con los puntos de sus últimos 5 encuentros (ponderados por el deslizador de "forma"), ajustada por su rendimiento específico como local o visitante y por la diferencia de goles por partido. La diferencia entre ambas puntuaciones, más la ventaja de jugar en casa, determina el reparto entre victoria local, empate y victoria visitante.</p>
+      </details>
+      <details>
+        <summary>¿Por qué los porcentajes no son una predicción exacta?</summary>
+        <p>El fútbol tiene un componente de azar que ningún modelo sencillo captura del todo: lesiones de última hora, decisiones arbitrales, el estado del terreno de juego. Este simulador sirve para comparar escenarios y entender qué variables pesan más, no para apostar con certeza sobre un resultado.</p>
+      </details>
+      <details>
+        <summary>¿Con qué frecuencia se actualizan los datos?</summary>
+        <p>Cada lunes por la tarde, una vez completada la jornada, se actualiza la clasificación, la forma de cada equipo y el calendario de la siguiente jornada en <code>assets/data.js</code>.</p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<nav class="bottomnav">
+  <a href="index.html"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="4" height="9"/><rect x="10" y="7" width="4" height="13"/><rect x="17" y="3" width="4" height="17"/></svg>Jornada</a>
+  <a href="predicciones.html" class="on"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-9"/><path d="M15 7h5v5"/></svg>Previsiones</a>
+  <a href="equipos.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg>Equipos</a>
+</nav>
+
+<script src="assets/data.js"></script>
+<script>
+const ids=['form','loc','adv','draw'];
+const sliders={}; ids.forEach(id=>sliders[id]=document.getElementById(id));
+const outs={}; ids.forEach(id=>outs[id]=document.getElementById(id+'Out'));
+
+function params(){ const p={}; ids.forEach(id=>p[id]=+sliders[id].value); return p; }
+
+function crestEl(code,size){
+  const t=TEAMS[code];
+  const d=document.createElement('div');
+  d.className='crest '+(size||'');
+  d.setAttribute('style',crestStyle(code));
+  d.textContent=code;
+  return d;
+}
+function formDots(code){
+  const wrap=document.createElement('div'); wrap.className='form-dots';
+  [...TEAMS[code].form].forEach(c=>{
+    const s=document.createElement('span'); s.className='fd '+c; s.textContent=c; wrap.appendChild(s);
+  });
+  return wrap;
+}
+function statCol(code,label){
+  const t=TEAMS[code];
+  const col=document.createElement('div'); col.className='stat-col';
+  col.innerHTML = `<h4>${label}</h4>
+    <div class="stat-row"><span>PJ / Pts</span><span>${t.pj} / ${t.g*3+t.e}</span></div>
+    <div class="stat-row"><span>GF–GC</span><span>${t.gf}–${t.gc}</span></div>
+    <div class="stat-row"><span>En casa</span><span>${t.h.g}G ${t.h.e}E ${t.h.p}P</span></div>
+    <div class="stat-row"><span>Fuera</span><span>${t.a.g}G ${t.a.e}E ${t.a.p}P</span></div>`;
+  return col;
+}
+
+function render(){
+  const p=params();
+  ids.forEach(id=>outs[id].textContent=sliders[id].value+'%');
+  const matchesEl=document.getElementById('matches');
+  matchesEl.innerHTML='';
+  let sumH=0,sumD=0,sumA=0;
+  FIXTURES.forEach((m,i)=>{
+    const r=matchProbs(m.h,m.a,p);
+    const fav = r.pH>=r.pA && r.pH>=r.pD ? 'h' : (r.pA>=r.pH && r.pA>=r.pD ? 'a' : 'd');
+    if(fav==='h') sumH++; else if(fav==='a') sumA++; else sumD++;
+    const st = fav==='d' ? 'm' : 'g';
+
+    const card=document.createElement('article'); card.className='pc'; card.style.animationDelay=(i*0.05)+'s';
+    const top=document.createElement('div'); top.className='pc-top';
+    const stBadge=document.createElement('div'); stBadge.className='st '+st;
+    stBadge.textContent = fav==='h'? '1' : fav==='a' ? '2' : 'X';
+    const info=document.createElement('div');
+    info.innerHTML=`<p class="lab">${m.when}</p><h3>${TEAMS[m.h].short} — ${TEAMS[m.a].short}</h3>`;
+    top.appendChild(stBadge); top.appendChild(info);
+    card.appendChild(top);
+
+    const bar=document.createElement('div'); bar.className='bar2';
+    const segH=document.createElement('div'); segH.className='seg-h'; segH.style.width=(r.pH*100)+'%'; segH.textContent=pct(r.pH);
+    const segD=document.createElement('div'); segD.className='seg-d'; segD.style.width=(r.pD*100)+'%'; segD.textContent=pct(r.pD);
+    const segA=document.createElement('div'); segA.className='seg-a'; segA.style.width=(r.pA*100)+'%'; segA.textContent=pct(r.pA);
+    bar.appendChild(segH); bar.appendChild(segD); bar.appendChild(segA);
+    card.appendChild(bar);
+
+    const call=document.createElement('p'); call.className='call';
+    const favName = fav==='h'?TEAMS[m.h].short : fav==='a'?TEAMS[m.a].short : 'Empate';
+    call.innerHTML = fav==='d' ? `El modelo ve un partido muy igualado, con <b>empate</b> como resultado más probable.` : `El modelo favorece a <b>${favName}</b> ${fav==='h'?'jugando en casa':'a domicilio'}.`;
+    card.appendChild(call);
+
+    const det=document.createElement('details');
+    det.innerHTML='<summary>Ver estadísticas de ambos equipos</summary>';
+    const grid=document.createElement('div'); grid.className='stat-grid';
+    grid.appendChild(statCol(m.h,TEAMS[m.h].short+' (casa)'));
+    grid.appendChild(statCol(m.a,TEAMS[m.a].short+' (fuera)'));
+    det.appendChild(grid);
+    const fd=document.createElement('div'); fd.style.marginTop='8px'; fd.style.fontSize='12px'; fd.style.color='var(--muted)';
+    fd.textContent='Forma (últimos 5): ';
+    const fdw=document.createElement('div'); fdw.style.display='flex'; fdw.style.gap='14px'; fdw.style.marginTop='6px';
+    const c1=document.createElement('div'); c1.appendChild(formDots(m.h));
+    const c2=document.createElement('div'); c2.appendChild(formDots(m.a));
+    fdw.appendChild(c1); fdw.appendChild(c2);
+    det.appendChild(fd); det.appendChild(fdw);
+    card.appendChild(det);
+
+    matchesEl.appendChild(card);
+  });
+  document.getElementById('sumH').textContent=sumH;
+  document.getElementById('sumD').textContent=sumD;
+  document.getElementById('sumA').textContent=sumA;
+}
+
+ids.forEach(id=>sliders[id].addEventListener('input',()=>{
+  document.querySelectorAll('#presets button').forEach(b=>b.setAttribute('aria-pressed','false'));
+  render();
+}));
+
+document.querySelectorAll('#presets button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#presets button').forEach(b=>b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+    const preset=PRESETS[btn.dataset.p];
+    ids.forEach(id=>sliders[id].value=preset[id]);
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
