@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>LaLiga en datos — Jornada</title>
-<meta name="description" content="Resultados de la Jornada 10 y calendario de la Jornada 11 de LaLiga, con clasificación en vivo.">
+<meta name="description" content="Resultados de la Jornada 11 y calendario de la Jornada 12 de LaLiga, con clasificación en vivo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -22,9 +22,9 @@
 
 <div class="wrap" style="padding-top:20px">
   <div>
-    <h1>Jornada 10</h1>
-    <p class="sub">Resultados del fin de semana del 23 al 26 de octubre, clasificación actualizada y el calendario de la Jornada 11.</p>
-    <p class="by">Datos a <b>26 oct, tarde</b> (pendiente el Sevilla-Osasuna de esta noche) · se actualiza cada lunes</p>
+    <h1>Jornada 11</h1>
+    <p class="sub">Resultados del fin de semana del 30 de octubre al 2 de noviembre, clasificación actualizada y el calendario de la Jornada 12.</p>
+    <p class="by">Datos a <b>2 nov, tarde</b> (pendiente el Deportivo-Osasuna de esta noche) · se actualiza cada lunes</p>
   </div>
 
   <div class="exec">
@@ -34,7 +34,7 @@
   </div>
 
   <div class="panel">
-    <h2>Calendario · Jornada 11 (30 oct – 2 nov)</h2>
+    <h2>Calendario · Jornada 12 (6 – 8 nov)</h2>
     <div class="scorecards" id="fixtures"></div>
   </div>
 
@@ -88,8 +88,8 @@ function matchRow(m,played){
   return el;
 }
 const scoreWrap=document.getElementById('scorecards');
-J10_PLAYED.forEach(m=>scoreWrap.appendChild(matchRow(m,true)));
-J10_PENDING.forEach(m=>scoreWrap.appendChild(matchRow({...m,live:true},false)));
+J11_PLAYED.forEach(m=>scoreWrap.appendChild(matchRow(m,true)));
+J11_PENDING.forEach(m=>scoreWrap.appendChild(matchRow({...m,live:true},false)));
 
 const fixWrap=document.getElementById('fixtures');
 FIXTURES.forEach(m=>fixWrap.appendChild(matchRow(m,false)));

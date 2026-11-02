@@ -2,56 +2,56 @@
    Se actualiza cada lunes (clasificación, forma, calendario). */
 
 const TEAMS = {
-  BAR:{n:"FC Barcelona",short:"Barça",pj:10,g:9,e:0,p:1,gf:40,gc:11,form:"GGGGP",h:{pj:5,g:4,e:0,p:1},a:{pj:5,g:5,e:0,p:0},color:"#a50044"},
-  ATM:{n:"Atlético de Madrid",short:"Atlético",pj:9,g:7,e:1,p:1,gf:19,gc:8,form:"GGGGG",h:{pj:4,g:3,e:1,p:0},a:{pj:5,g:4,e:0,p:1},color:"#cb3524"},
-  RMA:{n:"Real Madrid",short:"Real Madrid",pj:10,g:8,e:0,p:2,gf:25,gc:10,form:"GPGGG",h:{pj:5,g:5,e:0,p:0},a:{pj:5,g:3,e:0,p:2},color:"#1a2341"},
-  BET:{n:"Real Betis",short:"Betis",pj:10,g:6,e:2,p:2,gf:16,gc:14,form:"GEGPE",h:{pj:5,g:4,e:0,p:1},a:{pj:5,g:2,e:2,p:1},color:"#00a650"},
-  RSO:{n:"Real Sociedad",short:"Real Sociedad",pj:10,g:6,e:1,p:3,gf:19,gc:18,form:"EGGGG",h:{pj:5,g:3,e:1,p:1},a:{pj:5,g:3,e:0,p:2},color:"#0066b3"},
-  SEV:{n:"Sevilla FC",short:"Sevilla",pj:9,g:4,e:2,p:3,gf:14,gc:16,form:"GGPEP",h:{pj:4,g:2,e:0,p:2},a:{pj:5,g:2,e:2,p:1},color:"#d2001c"},
-  ALA:{n:"Deportivo Alavés",short:"Alavés",pj:9,g:3,e:2,p:4,gf:13,gc:10,form:"PPEPP",h:{pj:5,g:3,e:0,p:2},a:{pj:4,g:0,e:2,p:2},color:"#1c4f9c"},
-  CEL:{n:"Celta de Vigo",short:"Celta",pj:10,g:2,e:6,p:2,gf:10,gc:7,form:"EGEGE",h:{pj:6,g:2,e:2,p:2},a:{pj:4,g:0,e:4,p:0},color:"#8ac3ee",dark:true},
-  DEP:{n:"RC Deportivo",short:"Deportivo",pj:9,g:2,e:5,p:2,gf:13,gc:12,form:"EPEPE",h:{pj:5,g:1,e:3,p:1},a:{pj:4,g:1,e:2,p:1},color:"#0a4c9b"},
-  OSA:{n:"CA Osasuna",short:"Osasuna",pj:9,g:3,e:2,p:4,gf:10,gc:18,form:"PPEPG",h:{pj:5,g:2,e:2,p:1},a:{pj:4,g:1,e:0,p:3},color:"#ab122b"},
-  ATH:{n:"Athletic Club",short:"Athletic",pj:8,g:3,e:3,p:2,gf:11,gc:6,form:"GEEEG",h:{pj:5,g:2,e:2,p:1},a:{pj:3,g:1,e:1,p:1},color:"#ee2523"},
-  VIL:{n:"Villarreal CF",short:"Villarreal",pj:9,g:2,e:3,p:4,gf:13,gc:13,form:"PGGPE",h:{pj:4,g:1,e:1,p:2},a:{pj:5,g:1,e:2,p:2},color:"#ffe667",dark:true},
-  RAY:{n:"Rayo Vallecano",short:"Rayo",pj:8,g:2,e:3,p:3,gf:12,gc:17,form:"GPGEE",h:{pj:3,g:2,e:1,p:0},a:{pj:5,g:0,e:2,p:3},color:"#c8102e"},
-  GET:{n:"Getafe CF",short:"Getafe",pj:10,g:2,e:3,p:5,gf:5,gc:15,form:"PGPEP",h:{pj:5,g:2,e:3,p:0},a:{pj:5,g:0,e:0,p:5},color:"#005bac"},
-  ESP:{n:"RCD Espanyol",short:"Espanyol",pj:9,g:2,e:2,p:5,gf:11,gc:12,form:"GPPEP",h:{pj:5,g:1,e:1,p:3},a:{pj:4,g:1,e:1,p:2},color:"#1455a3"},
-  RAC:{n:"Racing de Santander",short:"Racing",pj:9,g:2,e:2,p:5,gf:13,gc:25,form:"GPPEP",h:{pj:4,g:2,e:2,p:0},a:{pj:5,g:0,e:0,p:5},color:"#00693e"},
-  LEV:{n:"Levante UD",short:"Levante",pj:9,g:1,e:4,p:4,gf:13,gc:18,form:"PPEEP",h:{pj:3,g:1,e:1,p:1},a:{pj:6,g:0,e:3,p:3},color:"#00246b"},
-  ELC:{n:"Elche CF",short:"Elche",pj:9,g:1,e:4,p:4,gf:11,gc:17,form:"EPGEE",h:{pj:4,g:0,e:1,p:3},a:{pj:5,g:1,e:3,p:1},color:"#00843d"},
-  VAL:{n:"Valencia CF",short:"Valencia",pj:9,g:1,e:3,p:5,gf:6,gc:15,form:"PGPEE",h:{pj:5,g:0,e:2,p:3},a:{pj:4,g:1,e:1,p:2},color:"#f7941e",dark:true},
-  MAL:{n:"Málaga CF",short:"Málaga",pj:9,g:0,e:4,p:5,gf:6,gc:18,form:"EPPEP",h:{pj:5,g:0,e:3,p:2},a:{pj:4,g:0,e:1,p:3},color:"#0e3b82"}
+  BAR:{n:"FC Barcelona",short:"Barça",pj:11,g:10,e:0,p:1,gf:46,gc:12,form:"GGGPG",h:{pj:6,g:5,e:0,p:1},a:{pj:5,g:5,e:0,p:0},color:"#a50044"},
+  ATM:{n:"Atlético de Madrid",short:"Atlético",pj:11,g:9,e:1,p:1,gf:22,gc:8,form:"GGGGG",h:{pj:5,g:4,e:1,p:0},a:{pj:6,g:5,e:0,p:1},color:"#cb3524"},
+  RMA:{n:"Real Madrid",short:"Real Madrid",pj:11,g:9,e:0,p:2,gf:28,gc:10,form:"PGGGG",h:{pj:5,g:5,e:0,p:0},a:{pj:6,g:4,e:0,p:2},color:"#1a2341"},
+  BET:{n:"Real Betis",short:"Betis",pj:11,g:7,e:2,p:2,gf:18,gc:15,form:"EGPEG",h:{pj:6,g:5,e:0,p:1},a:{pj:5,g:2,e:2,p:1},color:"#00a650"},
+  RSO:{n:"Real Sociedad",short:"Real Sociedad",pj:11,g:6,e:1,p:4,gf:20,gc:20,form:"GGGGP",h:{pj:5,g:3,e:1,p:1},a:{pj:6,g:3,e:0,p:3},color:"#0066b3"},
+  SEV:{n:"Sevilla FC",short:"Sevilla",pj:11,g:5,e:2,p:4,gf:17,gc:19,form:"PEPGP",h:{pj:5,g:3,e:0,p:2},a:{pj:6,g:2,e:2,p:2},color:"#d2001c"},
+  ALA:{n:"Deportivo Alavés",short:"Alavés",pj:11,g:3,e:3,p:5,gf:15,gc:17,form:"EPPPE",h:{pj:6,g:3,e:1,p:2},a:{pj:5,g:0,e:2,p:3},color:"#1c4f9c"},
+  CEL:{n:"Celta de Vigo",short:"Celta",pj:11,g:2,e:6,p:3,gf:10,gc:10,form:"GEGEP",h:{pj:6,g:2,e:2,p:2},a:{pj:5,g:0,e:4,p:1},color:"#8ac3ee",dark:true},
+  DEP:{n:"RC Deportivo",short:"Deportivo",pj:10,g:2,e:5,p:3,gf:13,gc:13,form:"PEPEP",h:{pj:5,g:1,e:3,p:1},a:{pj:5,g:1,e:2,p:2},color:"#0a4c9b"},
+  OSA:{n:"CA Osasuna",short:"Osasuna",pj:10,g:3,e:2,p:5,gf:10,gc:20,form:"PEPGP",h:{pj:5,g:2,e:2,p:1},a:{pj:5,g:1,e:0,p:4},color:"#ab122b"},
+  ATH:{n:"Athletic Club",short:"Athletic",pj:10,g:4,e:3,p:3,gf:14,gc:10,form:"EEPGG",h:{pj:6,g:3,e:2,p:1},a:{pj:4,g:1,e:1,p:2},color:"#ee2523"},
+  VIL:{n:"Villarreal CF",short:"Villarreal",pj:11,g:3,e:3,p:5,gf:15,gc:15,form:"GPEPG",h:{pj:5,g:1,e:1,p:3},a:{pj:6,g:2,e:2,p:2},color:"#ffe667",dark:true},
+  RAY:{n:"Rayo Vallecano",short:"Rayo",pj:10,g:3,e:3,p:4,gf:15,gc:20,form:"GEEPG",h:{pj:5,g:3,e:1,p:1},a:{pj:5,g:0,e:2,p:3},color:"#c8102e"},
+  GET:{n:"Getafe CF",short:"Getafe",pj:11,g:3,e:3,p:5,gf:8,gc:16,form:"GPEPG",h:{pj:6,g:3,e:3,p:0},a:{pj:5,g:0,e:0,p:5},color:"#005bac"},
+  ESP:{n:"RCD Espanyol",short:"Espanyol",pj:11,g:3,e:2,p:6,gf:13,gc:14,form:"PEPGP",h:{pj:5,g:1,e:1,p:3},a:{pj:6,g:2,e:1,p:3},color:"#1455a3"},
+  RAC:{n:"Racing de Santander",short:"Racing",pj:11,g:3,e:2,p:6,gf:15,gc:29,form:"PEPPG",h:{pj:6,g:3,e:2,p:1},a:{pj:5,g:0,e:0,p:5},color:"#00693e"},
+  LEV:{n:"Levante UD",short:"Levante",pj:11,g:2,e:4,p:5,gf:16,gc:21,form:"EEPGP",h:{pj:5,g:2,e:1,p:2},a:{pj:6,g:0,e:3,p:3},color:"#00246b"},
+  ELC:{n:"Elche CF",short:"Elche",pj:11,g:2,e:4,p:5,gf:14,gc:18,form:"GEEGP",h:{pj:5,g:0,e:1,p:4},a:{pj:6,g:2,e:3,p:1},color:"#00843d"},
+  VAL:{n:"Valencia CF",short:"Valencia",pj:11,g:2,e:3,p:6,gf:8,gc:17,form:"PEEGP",h:{pj:6,g:0,e:2,p:4},a:{pj:5,g:2,e:1,p:2},color:"#f7941e",dark:true},
+  MAL:{n:"Málaga CF",short:"Málaga",pj:11,g:0,e:5,p:6,gf:8,gc:21,form:"PEPPE",h:{pj:5,g:0,e:3,p:2},a:{pj:6,g:0,e:2,p:4},color:"#0e3b82"}
 };
 
-/* Jornada 10 — disputados (23-25 oct) y pendiente el Sevilla-Osasuna (26 oct) */
-const J10_PLAYED = [
-  {h:"ALA",a:"MAL",hs:1,as:1,when:"Vie 23 oct"},
-  {h:"RAY",a:"ELC",hs:0,as:3,when:"Sáb 24 oct"},
-  {h:"RAC",a:"ESP",hs:2,as:1,when:"Sáb 24 oct"},
-  {h:"VAL",a:"VIL",hs:1,as:2,when:"Sáb 24 oct"},
-  {h:"ATM",a:"DEP",hs:1,as:0,when:"Sáb 24 oct"},
-  {h:"ATH",a:"GET",hs:4,as:0,when:"Dom 25 oct"},
-  {h:"CEL",a:"BET",hs:0,as:0,when:"Dom 25 oct"},
-  {h:"RSO",a:"LEV",hs:2,as:1,when:"Dom 25 oct"},
-  {h:"BAR",a:"RMA",hs:1,as:2,when:"Dom 25 oct",tag:"El Clásico"}
+/* Jornada 11 — disputados (30 oct - 1 nov) y pendiente el Deportivo-Osasuna (2 nov) */
+const J11_PLAYED = [
+  {h:"VIL",a:"ESP",hs:0,as:1,when:"Vie 30 oct"},
+  {h:"LEV",a:"ATM",hs:0,as:2,when:"Sáb 31 oct"},
+  {h:"RAY",a:"CEL",hs:3,as:0,when:"Sáb 31 oct"},
+  {h:"BET",a:"MAL",hs:2,as:1,when:"Sáb 31 oct"},
+  {h:"BAR",a:"ALA",hs:6,as:1,when:"Sáb 31 oct"},
+  {h:"GET",a:"SEV",hs:3,as:1,when:"Dom 1 nov"},
+  {h:"RAC",a:"RMA",hs:0,as:3,when:"Dom 1 nov"},
+  {h:"ELC",a:"VAL",hs:0,as:1,when:"Dom 1 nov"},
+  {h:"ATH",a:"RSO",hs:2,as:1,when:"Dom 1 nov"}
 ];
-const J10_PENDING = [
-  {h:"SEV",a:"OSA",when:"Lun 26 oct · 20:00"}
+const J11_PENDING = [
+  {h:"DEP",a:"OSA",when:"Lun 2 nov · 21:00"}
 ];
 
-/* Jornada 11 — próximo fin de semana */
+/* Jornada 12 — próximo fin de semana */
 const FIXTURES = [
-  {h:"VIL",a:"ESP",when:"Vie 30 oct · 21:00"},
-  {h:"LEV",a:"ATM",when:"Sáb 31 oct · 14:00"},
-  {h:"RAY",a:"CEL",when:"Sáb 31 oct · 16:15"},
-  {h:"BET",a:"MAL",when:"Sáb 31 oct · 18:30"},
-  {h:"BAR",a:"ALA",when:"Sáb 31 oct · 21:00"},
-  {h:"GET",a:"SEV",when:"Dom 1 nov · 14:00"},
-  {h:"RAC",a:"RMA",when:"Dom 1 nov · 16:15"},
-  {h:"ELC",a:"VAL",when:"Dom 1 nov · 18:30"},
-  {h:"ATH",a:"RSO",when:"Dom 1 nov · 21:00"},
-  {h:"DEP",a:"OSA",when:"Lun 2 nov · 21:00"}
+  {h:"SEV",a:"ALA",when:"Vie 6 nov · 21:00"},
+  {h:"MAL",a:"RAC",when:"Sáb 7 nov · 14:00"},
+  {h:"ESP",a:"DEP",when:"Sáb 7 nov · 16:15"},
+  {h:"OSA",a:"ATH",when:"Sáb 7 nov · 18:30"},
+  {h:"VAL",a:"RMA",when:"Sáb 7 nov · 21:00"},
+  {h:"ELC",a:"BET",when:"Dom 8 nov · 14:00"},
+  {h:"RSO",a:"RAY",when:"Dom 8 nov · 16:15"},
+  {h:"CEL",a:"LEV",when:"Dom 8 nov · 18:30"},
+  {h:"VIL",a:"GET",when:"Dom 8 nov · 18:30"},
+  {h:"ATM",a:"BAR",when:"Dom 8 nov · 21:00"}
 ];
 
 const PRESETS = { tabla:{form:0,loc:0,adv:25,draw:50}, mixto:{form:55,loc:55,adv:28,draw:50} };
